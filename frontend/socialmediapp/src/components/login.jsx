@@ -4,6 +4,7 @@ import shareVideo from '../assets/share.mp4';
 import GoogleLogin from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
+import { client } from '../client';
 
 const Login = () => {
 
@@ -18,8 +19,10 @@ const Login = () => {
             userName: name,
             image: imageUrl,
         };
-        // TODO: Create sanity client and navigate
-    }
+        client.createIfNotExists(doc).then(() => {
+            navigate('/', { replace: true });
+        });
+    };
 
     return (
         <div className='flex justify-start items-center flex-col h-screen'>
