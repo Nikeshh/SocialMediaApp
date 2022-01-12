@@ -1,4 +1,4 @@
-const Sidebar = () => {
+const Sidebar = ({ closeToggle, user }) => {
     return(
         <div>
             <h1>Sidebar</h1>
