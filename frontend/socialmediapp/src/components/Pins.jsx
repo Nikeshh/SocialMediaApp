@@ -1,0 +1,9 @@
+const Pins = () => {
+    return (
+        <h1>
+            Pins
+        </h1>
+    );
+}
+
+export default Pins;
