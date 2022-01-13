@@ -6,12 +6,16 @@ import { userQuery } from '../utils/data';
 import Spinner from './Spinner';
 import { AiOutlineLogout } from 'react-icons/ai';
 
+const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
+const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
+
 const UserProfile = () => {
 
     const { userId } = useParams();
     const navigate = useNavigate();
-
     const [user, setUser] = useState();
+    const [text, setText] = useState('Created');
+    const [activeBtn, setActiveBtn] = useState('created');
 
     useEffect(() => {
         const query = userQuery(userId);
@@ -70,10 +74,29 @@ const UserProfile = () => {
                         )}
                     </div>
                 </div>
-                <div>
-
+                <div className='text-center mb-7'>
+                    <button
+                        type='button'
+                        onClick={(e) => {
+                            setText(e.target.textContent);
+                            setActiveBtn('created');
+                        }}
+                        className={`${activeBtn === 'created' ? activeBtnStyles : notActiveBtnStyles}`}
+                    >
+                        Created
+                    </button>
+                    <button
+                        type='button'
+                        onClick={(e) => {
+                            setText(e.target.textContent);
+                            setActiveBtn('saved');
+                        }}
+                        className={`${activeBtn === 'saved' ? activeBtnStyles : notActiveBtnStyles}`}
+                    >
+                        Saved
+                    </button>
                 </div>
-                <div>
+                <div className='px-2'>
                     
                 </div>
             </div>
