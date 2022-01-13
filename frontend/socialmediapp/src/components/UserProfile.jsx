@@ -5,6 +5,7 @@ import { client } from '../client';
 import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
 import Spinner from './Spinner';
 import { AiOutlineLogout } from 'react-icons/ai';
+import MasonryLayout from './MasonryLayout';
 
 const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
 const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
@@ -112,7 +113,7 @@ const UserProfile = () => {
                     </button>
                 </div>
                 <div className='px-2  '>
-                    {/* Implement mansonry layout */}
+                    <MasonryLayout pins={pins} />
                 </div>
                 {pins?.length === 0 && (
                     <div className='flex justify-center font-bold items-center w-full text-1xl mt-2'>
