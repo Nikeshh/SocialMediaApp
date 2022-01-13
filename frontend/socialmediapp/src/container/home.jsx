@@ -7,7 +7,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { client } from '../client';
 import { userQuery } from '../utils/data';
 import UserProfile from '../components/UserProfile';
-import Pins from '../components/Pins';
+import Pins from './Pins';
 
 const Home = () => {
 
