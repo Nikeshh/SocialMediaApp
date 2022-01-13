@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { pinDetailMorePinQuery, pinDetailQuery } from '../utils/data';
 import { client, urlFor } from '../client';
 import Spinner from './Spinner';
+import { MdDownloadForOffline } from 'react-icons/md';
 
 const PinDetail = ({ user }) => {
 
@@ -42,8 +43,31 @@ const PinDetail = ({ user }) => {
     return (
         <>
             {pinDetail && (
-                <div>
-                    <h1>Pin Detail comes here</h1>
+                <div className="flex xl:flex-row flex-col m-auto bg-white" style={{ maxWidth: '1500px', borderRadius: '32px' }}>
+                    <div className="flex justify-center items-center md:items-start flex-initial">
+                        <img
+                            className="rounded-t-3xl rounded-b-lg"
+                            src={(pinDetail?.image && urlFor(pinDetail?.image).url())}
+                            alt="user-post"
+                        />
+                    </div>
+                    <div className="w-full p-5 flex-1 xl:min-w-620">
+                        <div className="flex items-center justify-between">
+                            <div className="flex gap-2 items-center">
+                                <a
+                                    href={`${pinDetail.image.asset.url}?dl=`}
+                                    download
+                                    className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100"
+                                >
+                                    <MdDownloadForOffline />
+                                </a>
+                            </div>
+                            <a href={pinDetail.destination} target="_blank" rel="noreferrer">
+                                {pinDetail.destination?.slice(8)}
+                            </a>
+                        </div>
+                        {/* Pin Detail Title goes here */}
+                    </div>
                 </div>
             )}
             {pins?.length > 0 && (
