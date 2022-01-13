@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GoogleLogout } from 'react-google-login';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { client } from '../client';
-import { userQuery } from '../utils/data';
+import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
 import Spinner from './Spinner';
 import { AiOutlineLogout } from 'react-icons/ai';
 
@@ -35,6 +35,20 @@ const UserProfile = () => {
         localStorage.clear();
         navigate('/login');
     }
+
+    useEffect(() => {
+        if(text === 'Created') {
+            const createdPinsQuery = userCreatedPinsQuery(userId);
+            client.fetch(createdPinsQuery).then((data) => {
+                setPins(data);
+            });
+        } else {
+            const savedPinsQuery = userSavedPinsQuery(userId);
+            client.fetch(savedPinsQuery).then((data) => {
+                setPins(data);
+            });
+        }
+    }, [text, userId]);
 
     return (
         <div className="relative pb-2 h-full justify-center items-center">
