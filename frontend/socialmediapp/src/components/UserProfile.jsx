@@ -18,23 +18,14 @@ const UserProfile = () => {
     const [activeBtn, setActiveBtn] = useState('created');
     const [pins, setPins] = useState();
 
+    const User = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+
     useEffect(() => {
         const query = userQuery(userId);
         client.fetch(query).then((data) => {
             setUser(data[0]);
         });
     }, [userId]);
-
-    if(!user) {
-        return <Spinner message="Loading Profile" />;
-    }
-
-    const User = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
-
-    const logout = () => {
-        localStorage.clear();
-        navigate('/login');
-    }
 
     useEffect(() => {
         if(text === 'Created') {
@@ -49,6 +40,15 @@ const UserProfile = () => {
             });
         }
     }, [text, userId]);
+
+    const logout = () => {
+        localStorage.clear();
+        navigate('/login');
+    }
+
+    if(!user) {
+        return <Spinner message="Loading Profile" />;
+    }
 
     return (
         <div className="relative pb-2 h-full justify-center items-center">
