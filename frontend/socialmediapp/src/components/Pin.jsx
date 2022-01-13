@@ -17,14 +17,37 @@ const Pin = ({ pin }) => {
     alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
 
     const savePin = (id) => {
-
+        if (alreadySaved?.length === 0) {
+          setSavingPost(true);
+          client
+            .patch(id)
+            .setIfMissing({ save: [] })
+            .insert('after', 'save[-1]', [{
+              _key: uuidv4(),
+              userId: user?.googleId,
+              postedBy: {
+                _type: 'postedBy',
+                _ref: user?.googleId,
+              },
+            }])
+            .commit()
+            .then(() => {
+              window.location.reload();
+              setSavingPost(false);
+            });
+        }
     };
 
     const deletePin = (id) => {
-
+        client
+            .delete(id)
+            .then(() => {
+                window.location.reload();
+            });
     };
 
     const [savingPost, setSavingPost] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <div className='m-2'>
