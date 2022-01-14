@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { categories } from "../utils/data";
 import Spinner from "./Spinner";
 
@@ -13,6 +14,9 @@ const CreatePin = ({ user }) => {
     const [title, setTitle] = useState('');
     const [about, setAbout] = useState('');
     const [destination, setDestination] = useState();
+    const [category, setCategory] = useState();
+
+    const navigate = useNavigate();
 
     const uploadImage = (e) => {
 
