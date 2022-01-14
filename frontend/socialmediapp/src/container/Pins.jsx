@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { PinDetail } from '../components';
+import { PinDetail, Feed } from '../components';
 
 const Pins = ({ user }) => {
     return (
@@ -8,6 +8,7 @@ const Pins = ({ user }) => {
             </div>
             <div className="h-full">
                 <Routes>
+                    <Route path="/" element={<Feed />} />
                     <Route path="/pin-detail/:pinId" element={<PinDetail user={user && user} />} />
                 </Routes>
             </div>
